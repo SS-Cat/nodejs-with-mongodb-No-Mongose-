@@ -1,0 +1,37 @@
+<div id="pergaminhos">					
+	<h3>Pergaminhos</h3>
+	
+	<ul>
+		<% for(const e of data) { %>
+
+			<%	
+			let txt_acao = undefined; 
+ 
+			switch(parseInt(e.acao)){ 
+				case 1: txt_acao = `aldeão(ões) coletando recursos`; break; 
+				case 2: txt_acao = `enforcamento(s) programado`; 
+				case 3: txt_acao = `aldeão(ões) em treinamento de história`; 
+				case 4: txt_acao = `aldeão(ões) em treinamento de magia`; 
+			} 
+			 
+			const moment = new Date().getTime(); 
+
+			let minutos_restantes = Math.round((e.acao_end - moment) / 1000 / 60);
+			%>
+
+			<li> 
+				<%= `${e.quantidade}` %>
+				<span class="txt">
+					<%= `${txt_acao}` %>  - 
+				</span>
+				<small>
+					restam
+						<span class="minuto">
+					 		<%= minutos_restantes %>
+					 	</span> minutos - 
+					<a href="/revogar_acao_sudito?id=<%=e._id%>">revogar ordem</a>
+				</small>
+			</li>
+		<% } %>
+	</ul>
+</div>
